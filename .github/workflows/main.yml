@@ -1,0 +1,26 @@
+name: Release
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+#env:
+#  NODE_ENV: development
+#  DEPLOY_ENV: development
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - uses: icrawl/action-tsc@v1
+      - run: cd csvEditorHtml
+      - run: tsc -w
+      - run: ls
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: /home/runner/work/vscode-edit-csv/vscode-edit-csv/csvEditorHtml/
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
