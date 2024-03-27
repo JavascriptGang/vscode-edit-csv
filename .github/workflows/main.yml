@@ -15,8 +15,8 @@ jobs:
         with:
           node-version: '16'
       - run: npm install -D typescript
-      - run: cd csvEditorHtml
-      - run: tsc
+      #- run: cd csvEditorHtml
+      - run: tsc --build
       - run: ls
       - uses: actions/upload-artifact@v3
         with:
